@@ -23,4 +23,5 @@ function submitData(e){
     }
     users.push(data);
     localStorage.setItem('users',JSON.stringify(users));
+    window.location.href = '../../html/user/signin.html';
 }
