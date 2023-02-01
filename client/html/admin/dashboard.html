@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin dashboard</title>
+    <link rel="stylesheet" href="../../styles/admin/dashboard.css">
 </head>
 <body>
     <h1>welcome to admin dashboard</h1>
-    <form action="">
+    <form action="" id="form1">
         <input type="text" placeholder="Enter url" id="url">
         <input type="text" placeholder="Enter name of book" id="name">
         <input type="text" placeholder="Enter Author" id="author">
@@ -30,6 +31,45 @@
         <input type="number" placeholder="Enter cost" id="cost">
         <input type="submit">
     </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Book name</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Edition</th>
+                <th>Publisher</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <form action="" id="form2">
+        <input type="text" placeholder="Enter url" id="url1">
+        <input type="text" placeholder="Enter name of book" id="name1">
+        <input type="text" placeholder="Enter Author" id="author1">
+        <select name="" id="gener1">
+             <option value="select gener">select gener</option>
+             <option value="science">science</option>
+             <option value="fiction">Fiction</option>
+             <option value="history">History</option>
+             <option value="tech">Tech</option>
+             <option value="buisness">Buisness</option>
+        </select>
+        <select name="" id="edition1">
+            <option value="select edition">select edition</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
+        <input type="text" placeholder="Enter publisher" id="publisher1">
+        <input type="number" placeholder="Enter cost" id="cost1">
+        <input type="submit">
+    </form>
+    <div id="fade" class="black_overlay"></div>
 </body>
 </html>
 
