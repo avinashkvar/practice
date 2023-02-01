@@ -53,3 +53,10 @@ table,tr,th,td,thead,tbody{
   opacity: .80;
   filter: alpha(opacity=80);
 }
+a{
+    text-decoration: none;
+    color: black;
+    background-color: aqua;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
