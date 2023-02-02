@@ -1,5 +1,5 @@
 document.querySelector('#form1').addEventListener('submit', submitData);
-
+let editId = null;
 function submitData(e) {
 	e.preventDefault();
 	let url = document.getElementById('url').value;
@@ -37,16 +37,20 @@ function postData(data) {
 		.catch((err) => console.log(err));
 }
 
+window.onload = fetchData();
+
 function fetchData() {
 	fetch('https://mock-server-new.onrender.com/books')
 		.then((res) => res.json())
 		.then((res) => {
 			console.log(res);
 			displayResult(res);
+			document.getElementById('submit').removeAttribute('disabled')
+			document.querySelector('#form2').style.display = 'none';
+			document.querySelector('.black_overlay ').style.display = 'none';
 		})
 		.catch((err) => console.log(err));
 }
-fetchData();
 
 function displayResult(data) {
 	document.querySelector('tbody').innerHTML = null;
@@ -72,7 +76,8 @@ function displayResult(data) {
 		let edit = document.createElement('button');
 		let editTd = document.createElement('td');
 		edit.textContent = 'Edit';
-		edit.addEventListener('click', () => {
+		edit.setAttribute('id', 'editButton');
+		edit.addEventListener('click', function () {
 			editData(el);
 		});
 		editTd.append(edit);
@@ -109,8 +114,6 @@ function deleteItem(id) {
 
 function editData(el) {
 	window.scrollTo(0, 0);
-	document.querySelector('#form2').style.display = 'block';
-	document.querySelector('.black_overlay ').style.display = 'block';
 	document.getElementById('url1').value = el.image_url;
 	document.getElementById('name1').value = el.book_name;
 	document.getElementById('author1').value = el.author;
@@ -118,17 +121,14 @@ function editData(el) {
 	document.getElementById('edition1').value = el.edition;
 	document.getElementById('publisher1').value = el.publisher;
 	document.getElementById('cost1').value = el.cost;
-
-	document
-		.querySelector('#form2')
-		.addEventListener('submit', (e) => submitEdit(e, el.id));
+	document.querySelector('#form2').style.display = 'block';
+	document.querySelector('.black_overlay ').style.display = 'block';
+	editId = el.id
 }
 
-function submitEdit(e, id) {
+document.querySelector('#form2').addEventListener('submit', function (e) {
 	e.preventDefault();
-	document.querySelector('#form2').style.display = 'none';
-	document.querySelector('.black_overlay ').style.display = 'none';
-
+	document.getElementById('submit').setAttribute('disabled', 'disabled');
 	let url = document.getElementById('url1').value;
 	let name = document.getElementById('name1').value;
 	let author = document.getElementById('author1').value;
@@ -146,16 +146,18 @@ function submitEdit(e, id) {
 		cost: cost,
 		borrowed: false,
 	};
-	console.log(data);
-	patchData(data, id);
-}
+	patchData(data,editId)
+});
 
 function patchData(data, id) {
+	console.log('patchdata', id);
 	fetch(`https://mock-server-new.onrender.com/books/${id}`, {
 		method: 'PATCH',
 		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
+			'Content-type': 'application/json',
 		},
 		body: JSON.stringify(data),
-	}).then(() => fetchData());
+	}).then(() => {
+		fetchData();
+	});
 }
