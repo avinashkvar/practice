@@ -73,6 +73,8 @@ function displayResult(data) {
 		publisher.textContent = el.publisher;
 		let cost = document.createElement('td');
 		cost.textContent = el.cost;
+		let borrowed = document.createElement('td');
+		borrowed.textContent = `${el.borrowed ? "borrowed" : "not borrowed"}`
 		let edit = document.createElement('button');
 		let editTd = document.createElement('td');
 		edit.textContent = 'Edit';
@@ -96,6 +98,7 @@ function displayResult(data) {
 			edition,
 			publisher,
 			cost,
+			borrowed,
 			editTd,
 			delTd,
 		);
