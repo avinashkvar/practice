@@ -48,6 +48,7 @@ function displayIt(data) {
 }
 
 function borrowBook(el) {
+	window.scrollTo(0,0)
 	borrowId=el.id;
 	document.getElementById('image_url').src = el.image_url;
 
